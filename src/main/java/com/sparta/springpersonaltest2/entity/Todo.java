@@ -27,4 +27,12 @@ public class Todo extends Timestamped{
         this.contents = contents;
     }
 
+    public void updateTitle(String title){
+        this.title = title;
+    }
+
+    public void updateContents(String contents){
+        this.contents = contents;
+    }
+
 }
