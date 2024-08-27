@@ -1,4 +1,4 @@
-package com.sparta.springpersonaltest2.dto;
+package com.sparta.springpersonaltest2.dto.todoDto;
 
 import lombok.Getter;
 

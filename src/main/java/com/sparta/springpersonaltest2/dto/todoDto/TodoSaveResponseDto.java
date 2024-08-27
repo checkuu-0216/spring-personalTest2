@@ -1,11 +1,11 @@
-package com.sparta.springpersonaltest2.dto;
+package com.sparta.springpersonaltest2.dto.todoDto;
 
 import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Getter
-public class TodoUpdateTitleResponseDto {
+public class TodoSaveResponseDto {
 
     private final Long id;
     private final String userName;
@@ -14,7 +14,7 @@ public class TodoUpdateTitleResponseDto {
     private final LocalDateTime createAt;
     private final LocalDateTime modifiedAt;
 
-    public TodoUpdateTitleResponseDto (Long id, String userName,String title,String contents,LocalDateTime createAt, LocalDateTime modifiedAt){
+    public TodoSaveResponseDto(Long id,String userName , String title, String contents,LocalDateTime createAt,LocalDateTime modifiedAt) {
         this.id = id;
         this.userName = userName;
         this.title = title;

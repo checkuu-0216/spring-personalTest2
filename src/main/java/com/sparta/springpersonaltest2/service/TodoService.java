@@ -1,6 +1,6 @@
 package com.sparta.springpersonaltest2.service;
 
-import com.sparta.springpersonaltest2.dto.*;
+import com.sparta.springpersonaltest2.dto.todoDto.*;
 import com.sparta.springpersonaltest2.entity.Todo;
 import com.sparta.springpersonaltest2.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +14,7 @@ public class TodoService {
 
     private final TodoRepository todoRepository;
 
+    @Transactional
     public TodoSaveResponseDto saveTodo(TodoSaveRequestDto requestDto) {
         Todo todo = new Todo(requestDto.getUserName(), requestDto.getTitle(), requestDto.getContents());
 
@@ -29,6 +30,7 @@ public class TodoService {
         return dto;
     }
 
+    @Transactional
     public TodoUpdateTitleResponseDto updateTodoTitle(Long id, TodoUpdateTitleRequestDto requestDto) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new NullPointerException("해당하는 일정이 없습니다."));
         todo.updateTitle(requestDto.getTitle());
@@ -37,6 +39,7 @@ public class TodoService {
     }
 
 
+    @Transactional
     public TodoUpdateContentsResponseDto updateTodoContents(Long id, TodoUpdateContentsRequestDto requestDto) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new NullPointerException("해당하는 일정이 없습니다."));
         todo.updateContents(requestDto.getContents());

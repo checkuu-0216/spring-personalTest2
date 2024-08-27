@@ -1,6 +1,6 @@
 package com.sparta.springpersonaltest2.controller;
 
-import com.sparta.springpersonaltest2.dto.*;
+import com.sparta.springpersonaltest2.dto.todoDto.*;
 import com.sparta.springpersonaltest2.service.TodoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
