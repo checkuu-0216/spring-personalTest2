@@ -34,7 +34,7 @@ public class TodoService {
 
     public TodoDetailResponseDto getTodo(Long id) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new NullPointerException("해당하는 일정이 없습니다."));
-        TodoDetailResponseDto dto = new TodoDetailResponseDto(todo.getId(), todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getCreateAt(),todo.getModifiedAt());
+        TodoDetailResponseDto dto = new TodoDetailResponseDto(todo.getId(), todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getCreateAt(),todo.getModifiedAt(),todo.getReplys());
         return dto;
     }
 
