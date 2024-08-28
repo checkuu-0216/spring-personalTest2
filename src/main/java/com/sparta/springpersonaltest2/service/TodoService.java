@@ -1,11 +1,18 @@
 package com.sparta.springpersonaltest2.service;
 
+import com.sparta.springpersonaltest2.dto.replyDto.ReplySimpleResponseDto;
 import com.sparta.springpersonaltest2.dto.todoDto.*;
 import com.sparta.springpersonaltest2.entity.Todo;
+import com.sparta.springpersonaltest2.repository.ReplyRepository;
 import com.sparta.springpersonaltest2.repository.TodoRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -13,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class TodoService {
 
     private final TodoRepository todoRepository;
+    private final ReplyRepository replyRepository;
 
     @Transactional
     public TodoSaveResponseDto saveTodo(TodoSaveRequestDto requestDto) {
@@ -46,14 +54,12 @@ public class TodoService {
         return dto;
     }
 
-//    public Page<TodoListResponseDto> getTodoList(Pageable pageable) {
-//        List<Todo> todoList = todoRepository.findAll();
-//        List<TodoListResponseDto> todoListResponseDtos = new ArrayList<>();
-//
-//        for (Todo todo : todoList) {
-//            todoListResponseDtos.add(new TodoListResponseDto(todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getReply(),todo.getCreateAt(),todo.getModifiedAt()));
-//        }
-//        return todoListResponseDtos;
-//    }
+    public Page<TodoSimpleResponseDto> getTodos(int page, int size){
+        Pageable pageable = PageRequest.of(page -1,size);
+
+        Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
+
+        return todos.map(todo -> new TodoSimpleResponseDto(todo.getId(),todo.getUserName(),todo.getTitle(),todo.getCreateAt(),todo.getModifiedAt(),todo.getReplys()));
+    }
 
 }

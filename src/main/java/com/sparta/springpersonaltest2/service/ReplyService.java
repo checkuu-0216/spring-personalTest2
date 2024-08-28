@@ -22,6 +22,7 @@ public class ReplyService {
 
     @Transactional
     public ReplySaveResponseDto saveReply(@PathVariable Long todoId, ReplySaveRequestDto requestDto) {
+        // 일정과 댓글 연관관계 맺어주고 일정에 댓글 달게 메서드 변경
         Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 게시글이 없습니다."));
 
         Reply reply = new Reply(requestDto.getUserName(),requestDto.getContents(),todo);

@@ -3,6 +3,8 @@ package com.sparta.springpersonaltest2.controller;
 import com.sparta.springpersonaltest2.dto.todoDto.*;
 import com.sparta.springpersonaltest2.service.TodoService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,5 +32,11 @@ public class TodoController {
     @PostMapping("/todos/{id}/contents") //내용 수정
     public TodoUpdateContentsResponseDto updateTodoContents(@PathVariable Long id , @RequestBody TodoUpdateContentsRequestDto requestDto){
         return  todoService.updateTodoContents(id,requestDto);
+    }
+
+    @GetMapping("/todos") //단체 조회
+    public ResponseEntity<Page<TodoSimpleResponseDto>> getTodos(@RequestParam(defaultValue = "1",required = false) int page, @RequestParam(defaultValue = "10", required = false) int size) {
+
+        return ResponseEntity.ok(todoService.getTodos(page,size));
     }
 }
