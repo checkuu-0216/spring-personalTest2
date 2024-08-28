@@ -16,19 +16,21 @@ public class TodoSimpleResponseDto {
     private final String title;
     private final LocalDateTime createAt;
     private final LocalDateTime modifiedAt;
-    private final List<ReplySimpleResponseDto> replys;
+    private final Integer replyCount;
 
-    public TodoSimpleResponseDto(Long todoId, String userName, String title,LocalDateTime createAt, LocalDateTime modifiedAt, List<Reply> replys){
+
+    public TodoSimpleResponseDto(Long todoId, String userName, String title,List<Reply> replys,LocalDateTime createAt, LocalDateTime modifiedAt){
         List<ReplySimpleResponseDto> dtoList = new ArrayList<>();
         for (Reply reply : replys) {
-            dtoList.add(new ReplySimpleResponseDto(reply.getUserName(),reply.getContents()));
+            dtoList.add(new ReplySimpleResponseDto(reply.getUserName(), reply.getContents()));
         }
+
         this.todoId = todoId;
         this.userName = userName;
         this.title = title;
         this.createAt = createAt;
         this.modifiedAt = modifiedAt;
-        this.replys = dtoList;
+        this.replyCount = dtoList.size();
     }
 
 }

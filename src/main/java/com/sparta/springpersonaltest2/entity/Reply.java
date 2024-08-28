@@ -27,4 +27,5 @@ public class Reply extends Timestamped{ //todo와 1 대 N 관계
     public void updateReply(String contents) {
         this.contents = contents;
     }
+
 }

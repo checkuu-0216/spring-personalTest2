@@ -59,7 +59,7 @@ public class TodoService {
 
         Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
 
-        return todos.map(todo -> new TodoSimpleResponseDto(todo.getId(),todo.getUserName(),todo.getTitle(),todo.getCreateAt(),todo.getModifiedAt(),todo.getReplys()));
+        return todos.map(todo -> new TodoSimpleResponseDto(todo.getId(),todo.getUserName(),todo.getTitle(),todo.getReplys(),todo.getCreateAt(),todo.getModifiedAt()));
     }
 
 }
