@@ -18,6 +18,7 @@ public class TodoController {
 
     @GetMapping("/todos/{id}") // 단건조회
     public TodoDetailResponseDto getTodo(@PathVariable Long id){
+
         return todoService.getTodo(id);
     }
 

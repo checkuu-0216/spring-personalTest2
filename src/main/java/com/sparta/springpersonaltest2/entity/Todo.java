@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +18,8 @@ public class Todo extends Timestamped{
     private String title;
     private String contents;
 
-    @OneToMany
-    private List<Reply> reply = new ArrayList<>();
+    @OneToMany(mappedBy = "todo")
+    private List<Reply> Reply = new ArrayList<>();
 
 
     public Todo(String userName , String title, String contents){

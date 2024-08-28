@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Entity
 @Getter
 @NoArgsConstructor
@@ -13,15 +11,17 @@ public class Reply extends Timestamped{ //todo와 1 대 N 관계
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
+    private String userName;
     private String contents;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Todo_id")
     private Todo todo;
 
-    public Reply(String name,String contents){
-       this.name = name;
+    public Reply(String userName, String contents,Todo todo){
+       this.userName = userName;
        this.contents =contents;
+       this.todo = todo;
     }
 
     public void updateReply(String contents) {

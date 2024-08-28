@@ -38,7 +38,6 @@ public class TodoService {
         return dto;
     }
 
-
     @Transactional
     public TodoUpdateContentsResponseDto updateTodoContents(Long id, TodoUpdateContentsRequestDto requestDto) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new NullPointerException("해당하는 일정이 없습니다."));
@@ -46,4 +45,15 @@ public class TodoService {
         TodoUpdateContentsResponseDto dto = new TodoUpdateContentsResponseDto(todo.getId(), todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getCreateAt(),todo.getModifiedAt());
         return dto;
     }
+
+//    public Page<TodoListResponseDto> getTodoList(Pageable pageable) {
+//        List<Todo> todoList = todoRepository.findAll();
+//        List<TodoListResponseDto> todoListResponseDtos = new ArrayList<>();
+//
+//        for (Todo todo : todoList) {
+//            todoListResponseDtos.add(new TodoListResponseDto(todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getReply(),todo.getCreateAt(),todo.getModifiedAt()));
+//        }
+//        return todoListResponseDtos;
+//    }
+
 }

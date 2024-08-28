@@ -1,5 +1,6 @@
 package com.sparta.springpersonaltest2.dto.todoDto;
 
+import com.sparta.springpersonaltest2.dto.replyDto.ReplyDetailResponseDto;
 import lombok.Getter;
 
 import java.time.LocalDateTime;

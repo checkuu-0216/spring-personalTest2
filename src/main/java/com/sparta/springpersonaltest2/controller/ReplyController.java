@@ -14,9 +14,9 @@ public class ReplyController {
 
     private final ReplyService replyService;
 
-    @PostMapping("/replys") //댓글 저장
-    public ReplySaveResponseDto saveReply(@RequestBody ReplySaveRequestDto requestDto) {
-        return replyService.saveReply(requestDto);
+    @PostMapping("/todos/{todoId}/replys") //댓글 저장
+    public ReplySaveResponseDto saveReply(@PathVariable Long todoId,@RequestBody ReplySaveRequestDto requestDto) {
+        return replyService.saveReply(todoId,requestDto);
     }
 
     @GetMapping("/replys/{replyId}") //단건조회
