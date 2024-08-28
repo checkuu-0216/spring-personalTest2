@@ -42,16 +42,14 @@ public class TodoService {
     public TodoUpdateTitleResponseDto updateTodoTitle(Long id, TodoUpdateTitleRequestDto requestDto) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new NullPointerException("해당하는 일정이 없습니다."));
         todo.updateTitle(requestDto.getTitle());
-        TodoUpdateTitleResponseDto dto = new TodoUpdateTitleResponseDto(todo.getId(), todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getCreateAt(),todo.getModifiedAt());
-        return dto;
+        return new TodoUpdateTitleResponseDto(todo.getId(), todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getCreateAt(),todo.getModifiedAt());
     }
 
     @Transactional
     public TodoUpdateContentsResponseDto updateTodoContents(Long id, TodoUpdateContentsRequestDto requestDto) {
         Todo todo = todoRepository.findById(id).orElseThrow(() -> new NullPointerException("해당하는 일정이 없습니다."));
         todo.updateContents(requestDto.getContents());
-        TodoUpdateContentsResponseDto dto = new TodoUpdateContentsResponseDto(todo.getId(), todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getCreateAt(),todo.getModifiedAt());
-        return dto;
+        return new TodoUpdateContentsResponseDto(todo.getId(), todo.getUserName(), todo.getTitle(), todo.getContents(),todo.getCreateAt(),todo.getModifiedAt());
     }
 
     public Page<TodoSimpleResponseDto> getTodos(int page, int size){
@@ -60,6 +58,13 @@ public class TodoService {
         Page<Todo> todos = todoRepository.findAllByOrderByModifiedAtDesc(pageable);
 
         return todos.map(todo -> new TodoSimpleResponseDto(todo.getId(),todo.getUserName(),todo.getTitle(),todo.getReplys(),todo.getCreateAt(),todo.getModifiedAt()));
+    }
+
+    public void deleteTodo(Long todoId){
+        if(!todoRepository.existsById(todoId)){
+            throw new NullPointerException("해당하는 게시글이 없습니다.");
+        }
+        todoRepository.deleteById(todoId);
     }
 
 }

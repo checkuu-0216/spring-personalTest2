@@ -24,19 +24,24 @@ public class TodoController {
         return todoService.getTodo(id);
     }
 
-    @PostMapping("/todos/{id}/title") //제목 수정
-    public TodoUpdateTitleResponseDto updateTodoTitle(@PathVariable Long id , @RequestBody TodoUpdateTitleRequestDto requestDto){
-        return todoService.updateTodoTitle(id,requestDto);
+    @PostMapping("/todos/{todoId}/title") //제목 수정
+    public TodoUpdateTitleResponseDto updateTodoTitle(@PathVariable Long todoId , @RequestBody TodoUpdateTitleRequestDto requestDto){
+        return todoService.updateTodoTitle(todoId,requestDto);
     }
 
-    @PostMapping("/todos/{id}/contents") //내용 수정
-    public TodoUpdateContentsResponseDto updateTodoContents(@PathVariable Long id , @RequestBody TodoUpdateContentsRequestDto requestDto){
-        return  todoService.updateTodoContents(id,requestDto);
+    @PostMapping("/todos/{todoId}/contents") //내용 수정
+    public TodoUpdateContentsResponseDto updateTodoContents(@PathVariable Long todoId , @RequestBody TodoUpdateContentsRequestDto requestDto){
+        return  todoService.updateTodoContents(todoId,requestDto);
     }
 
     @GetMapping("/todos") //단체 조회
     public ResponseEntity<Page<TodoSimpleResponseDto>> getTodos(@RequestParam(defaultValue = "1",required = false) int page, @RequestParam(defaultValue = "10", required = false) int size) {
 
         return ResponseEntity.ok(todoService.getTodos(page,size));
+    }
+
+    @DeleteMapping("/todos/{todoId}") //일정 삭제
+    public void deleteTodo(@PathVariable Long todoId){
+        todoService.deleteTodo(todoId);
     }
 }
