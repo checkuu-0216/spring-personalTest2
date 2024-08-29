@@ -19,22 +19,22 @@ public class ReplyController {
         return replyService.saveReply(todoId,requestDto);
     }
 
-    @GetMapping("/replys/{replyId}") //단건조회
+    @GetMapping("/todos/{todoId}/replys/{replyId}") //단건조회
     public ReplyDetailResponseDto getReply(@PathVariable Long replyId) {
         return replyService.getReply(replyId);
     }
 
-    @GetMapping("/replys") //단체 조회
-    public List<ReplySimpleResponseDto> getReplys() {
-        return replyService.getReplys();
+    @GetMapping("/todos/{todoId}/replys") //단체 조회
+    public List<ReplySimpleResponseDto> getReplys(@PathVariable Long todoId) {
+        return replyService.getReplys(todoId);
     }
 
-    @PostMapping("/replys/{replyId}") //수정
+    @PutMapping("/todos/replys/{replyId}") //수정
     public ReplyUpdateReponseDto updateRely(@PathVariable Long replyId, @RequestBody ReplyUpdateRequestDto requestDto){
         return replyService.updateReply(replyId,requestDto);
     }
 
-    @DeleteMapping("/replys/{replyId}") //삭제
+    @DeleteMapping("/todos/replys/{replyId}") //삭제
     public void deleteReply(@PathVariable Long replyId){
         replyService.deleteReply(replyId);
     }

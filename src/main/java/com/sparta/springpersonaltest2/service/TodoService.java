@@ -24,9 +24,7 @@ public class TodoService {
         Todo todo = new Todo(requestDto.getUserName(), requestDto.getTitle(), requestDto.getContents());
 
         Todo savedTodo = todoRepository.save(todo);
-        return new TodoSaveResponseDto(
-                savedTodo.getId(), savedTodo.getUserName(), savedTodo.getTitle(), savedTodo.getContents(), savedTodo.getCreateAt(), savedTodo.getModifiedAt());
-
+        return new TodoSaveResponseDto(savedTodo.getId(), savedTodo.getUserName(), savedTodo.getTitle(), savedTodo.getContents(), savedTodo.getCreateAt(), savedTodo.getModifiedAt());
     }
 
     public TodoDetailResponseDto getTodo(Long id) {

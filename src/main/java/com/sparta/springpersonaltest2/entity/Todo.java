@@ -21,6 +21,9 @@ public class Todo extends Timestamped{
     @OneToMany(mappedBy = "todo")
     private List<Reply> Replys = new ArrayList<>();
 
+    @OneToMany(mappedBy = "todo")
+    private List<UsersTodo> usersTodos = new ArrayList<>();
+
 
     public Todo(String userName , String title, String contents){
         this.userName = userName;

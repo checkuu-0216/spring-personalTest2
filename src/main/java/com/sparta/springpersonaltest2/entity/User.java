@@ -1,11 +1,11 @@
 package com.sparta.springpersonaltest2.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,4 +22,8 @@ public class User extends Timestamped {
         this.userName = userName;
         this.email = email;
     }
+
+    @OneToMany(mappedBy = "user")
+    private List<UsersTodo> usersTodos = new ArrayList<>();
+
 }

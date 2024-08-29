@@ -20,7 +20,6 @@ public class TodoController {
 
     @GetMapping("/todos/{todoId}") // 단건조회
     public TodoDetailResponseDto getTodo(@PathVariable Long id){
-
         return todoService.getTodo(id);
     }
 
@@ -34,7 +33,7 @@ public class TodoController {
         return  todoService.updateTodoContents(todoId,requestDto);
     }
 
-    @GetMapping("/todos") //단체 조회
+    @GetMapping("/todos") //전체 조회
     public ResponseEntity<Page<TodoSimpleResponseDto>> getTodos(@RequestParam(defaultValue = "1",required = false) int page, @RequestParam(defaultValue = "10", required = false) int size) {
 
         return ResponseEntity.ok(todoService.getTodos(page,size));
