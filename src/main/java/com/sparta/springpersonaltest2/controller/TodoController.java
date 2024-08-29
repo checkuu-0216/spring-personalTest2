@@ -18,18 +18,18 @@ public class TodoController {
         return todoService.saveTodo(requestDto);
     }
 
-    @GetMapping("/todos/{id}") // 단건조회
+    @GetMapping("/todos/{todoId}") // 단건조회
     public TodoDetailResponseDto getTodo(@PathVariable Long id){
 
         return todoService.getTodo(id);
     }
 
-    @PostMapping("/todos/{todoId}/title") //제목 수정
+    @PutMapping("/todos/{todoId}/title") //제목 수정
     public TodoUpdateTitleResponseDto updateTodoTitle(@PathVariable Long todoId , @RequestBody TodoUpdateTitleRequestDto requestDto){
         return todoService.updateTodoTitle(todoId,requestDto);
     }
 
-    @PostMapping("/todos/{todoId}/contents") //내용 수정
+    @PutMapping("/todos/{todoId}/contents") //내용 수정
     public TodoUpdateContentsResponseDto updateTodoContents(@PathVariable Long todoId , @RequestBody TodoUpdateContentsRequestDto requestDto){
         return  todoService.updateTodoContents(todoId,requestDto);
     }

@@ -1,6 +1,5 @@
 package com.sparta.springpersonaltest2.service;
 
-import com.sparta.springpersonaltest2.dto.replyDto.ReplySimpleResponseDto;
 import com.sparta.springpersonaltest2.dto.todoDto.*;
 import com.sparta.springpersonaltest2.entity.Todo;
 import com.sparta.springpersonaltest2.repository.ReplyRepository;
@@ -11,8 +10,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
