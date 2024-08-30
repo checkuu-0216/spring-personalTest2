@@ -1,14 +1,15 @@
 package com.sparta.springpersonaltest2.dto.replyDto;
 
+import com.sparta.springpersonaltest2.dto.userDto.UserDto;
 import lombok.Getter;
 
 @Getter
 public class ReplySimpleResponseDto {
-    private final String name;
+    private final UserDto user;
     private final String contents;
 
-    public ReplySimpleResponseDto(String name,String contents){
-        this.name = name;
+    public ReplySimpleResponseDto(UserDto user,String contents){
+        this.user = user;
         this.contents = contents;
     }
 }

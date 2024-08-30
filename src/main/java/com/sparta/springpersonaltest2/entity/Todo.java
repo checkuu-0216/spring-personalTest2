@@ -14,19 +14,22 @@ public class Todo extends Timestamped{
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String userName;
     private String title;
     private String contents;
 
-    @OneToMany(mappedBy = "todo")
+    @OneToMany(mappedBy = "todo",cascade = CascadeType.REMOVE)
     private List<Reply> Replys = new ArrayList<>();
 
     @OneToMany(mappedBy = "todo")
-    private List<UsersTodo> usersTodos = new ArrayList<>();
+    private List<Manager> managers = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id",nullable = false)
+    private User user;
 
 
-    public Todo(String userName , String title, String contents){
-        this.userName = userName;
+    public Todo(User user , String title, String contents){
+        this.user = user;
         this.title = title;
         this.contents = contents;
     }

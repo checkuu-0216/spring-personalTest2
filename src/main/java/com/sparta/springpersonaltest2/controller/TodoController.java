@@ -14,28 +14,30 @@ public class TodoController {
     private final TodoService todoService;
 
     @PostMapping("/todos") //등록
-    public TodoSaveResponseDto saveTodo(@RequestBody TodoSaveRequestDto requestDto){
-        return todoService.saveTodo(requestDto);
+    public ResponseEntity<TodoSaveResponseDto> saveTodo(@RequestBody TodoSaveRequestDto requestDto){
+        return ResponseEntity.ok(todoService.saveTodo(requestDto));
     }
 
     @GetMapping("/todos/{todoId}") // 단건조회
-    public TodoDetailResponseDto getTodo(@PathVariable Long id){
-        return todoService.getTodo(id);
+    public ResponseEntity<TodoDetailResponseDto> getTodo(@PathVariable Long id){
+        return ResponseEntity.ok(todoService.getTodo(id));
     }
 
     @PutMapping("/todos/{todoId}/title") //제목 수정
-    public TodoUpdateTitleResponseDto updateTodoTitle(@PathVariable Long todoId , @RequestBody TodoUpdateTitleRequestDto requestDto){
-        return todoService.updateTodoTitle(todoId,requestDto);
+    public ResponseEntity<TodoUpdateTitleResponseDto> updateTodoTitle(@PathVariable Long todoId , @RequestBody TodoUpdateTitleRequestDto requestDto){
+        return ResponseEntity.ok(todoService.updateTodoTitle(todoId,requestDto));
     }
 
     @PutMapping("/todos/{todoId}/contents") //내용 수정
-    public TodoUpdateContentsResponseDto updateTodoContents(@PathVariable Long todoId , @RequestBody TodoUpdateContentsRequestDto requestDto){
-        return  todoService.updateTodoContents(todoId,requestDto);
+    public ResponseEntity<TodoUpdateContentsResponseDto> updateTodoContents(@PathVariable Long todoId , @RequestBody TodoUpdateContentsRequestDto requestDto){
+        return  ResponseEntity.ok(todoService.updateTodoContents(todoId,requestDto));
     }
 
     @GetMapping("/todos") //전체 조회
-    public ResponseEntity<Page<TodoSimpleResponseDto>> getTodos(@RequestParam(defaultValue = "1",required = false) int page, @RequestParam(defaultValue = "10", required = false) int size) {
-
+    public ResponseEntity<Page<TodoSimpleResponseDto>> getTodos(
+            @RequestParam(defaultValue = "1",required = false) int page,
+            @RequestParam(defaultValue = "10", required = false) int size
+    ) {
         return ResponseEntity.ok(todoService.getTodos(page,size));
     }
 

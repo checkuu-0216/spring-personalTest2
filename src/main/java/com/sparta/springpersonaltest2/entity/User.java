@@ -15,15 +15,15 @@ public class User extends Timestamped {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
+    @Column(unique = true)
     private String email;
 
-    public User (Long id,String userName, String email) {
-        this.id = id;
+    public User (String userName, String email) {
         this.userName = userName;
         this.email = email;
     }
 
     @OneToMany(mappedBy = "user")
-    private List<UsersTodo> usersTodos = new ArrayList<>();
+    private List<Manager> managers = new ArrayList<>();
 
 }

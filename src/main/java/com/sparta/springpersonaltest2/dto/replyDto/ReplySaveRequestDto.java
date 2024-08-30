@@ -5,6 +5,6 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 @Getter
 public class ReplySaveRequestDto {
-    private String userName;
+    private Long userId;
     private String contents;
 }
