@@ -12,18 +12,16 @@ import java.util.List;
 @NoArgsConstructor
 public class User extends Timestamped {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String userName;
     @Column(unique = true)
     private String email;
 
-    public User (String userName, String email) {
+    public User(String userName, String email) {
         this.userName = userName;
         this.email = email;
     }
-
-    @OneToMany(mappedBy = "user")
-    private List<Manager> managers = new ArrayList<>();
 
 }

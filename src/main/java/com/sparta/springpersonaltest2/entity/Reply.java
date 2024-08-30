@@ -10,15 +10,16 @@ import lombok.NoArgsConstructor;
 public class Reply extends Timestamped{ //todo와 1 대 N 관계
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reply_id")
     private Long id;
     private String contents;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "User_id")
+    @JoinColumn(name = "User_id",nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "Todo_id")
+    @JoinColumn(name = "Todo_id",nullable = false)
     private Todo todo;
 
     public Reply(User user, String contents,Todo todo){

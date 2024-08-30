@@ -1,6 +1,7 @@
 package com.sparta.springpersonaltest2.dto.todoDto;
 
 import com.sparta.springpersonaltest2.dto.userDto.UserDto;
+import com.sparta.springpersonaltest2.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -15,9 +16,9 @@ public class TodoSaveResponseDto {
     private final LocalDateTime createAt;
     private final LocalDateTime modifiedAt;
 
-    public TodoSaveResponseDto(Long id, UserDto user , String title, String contents, LocalDateTime createAt, LocalDateTime modifiedAt) {
+    public TodoSaveResponseDto(Long id, User user , String title, String contents, LocalDateTime createAt, LocalDateTime modifiedAt) {
         this.id = id;
-        this.user= user;
+        this.user= new UserDto(user.getId(), user.getUserName(), user.getEmail());
         this.title = title;
         this.contents = contents;
         this.createAt = createAt;

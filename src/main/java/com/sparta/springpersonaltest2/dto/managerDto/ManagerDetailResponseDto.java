@@ -6,10 +6,12 @@ import lombok.Getter;
 @Getter
 public class ManagerDetailResponseDto {
     private final Long id;
-    private final UserDto user;
+    private final String userName;
+    private final String email;
 
-    public ManagerDetailResponseDto(Long id, UserDto user) {
+    public ManagerDetailResponseDto(Long id, String userName,String email) {
         this.id = id;
-        this.user = user;
+        this.userName = userName;
+        this.email = email;
     }
 }

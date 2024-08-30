@@ -34,28 +34,24 @@ public class ReplyService {
         Reply savedReply = replyRepository.save(reply);
         return new ReplySaveResponseDto(
                 savedReply.getId(),
-                new UserDto(user.getId(),
-                        user.getUserName(),
-                        user.getEmail()),
+                user,
                 savedReply.getContents(),
                 savedReply.getCreateAt(),
                 savedReply.getModifiedAt());
     }
 
     public ReplyDetailResponseDto getReply(Long replyId) {
-        Reply Reply = replyRepository.findById(replyId).orElseThrow(() -> new NullPointerException("해당하는 댓글이 없습니다."));
-        User user = Reply.getUser();
-        ReplyDetailResponseDto dto = new ReplyDetailResponseDto(Reply.getId(),new UserDto(user.getId(),
-                user.getUserName(),
-                user.getEmail()),Reply.getContents(), Reply.getCreateAt(), Reply.getModifiedAt());
+        Reply reply = replyRepository.findById(replyId).orElseThrow(() -> new NullPointerException("해당하는 댓글이 없습니다."));
+        User user = reply.getUser();
+        ReplyDetailResponseDto dto = new ReplyDetailResponseDto(reply.getId(),user,reply.getContents(), reply.getCreateAt(), reply.getModifiedAt());
         return dto;
     }
 
     @Transactional
     public ReplyUpdateReponseDto updateReply(Long replyId, ReplyUpdateRequestDto requestDto) {
-        Reply Reply = replyRepository.findById(replyId).orElseThrow(() -> new NullPointerException("해당하는 댓글이 없습니다."));
-        Reply.updateReply(requestDto.getContents());
-        ReplyUpdateReponseDto dto = new ReplyUpdateReponseDto(Reply.getId(), Reply.getContents(), Reply.getCreateAt(), Reply.getModifiedAt());
+        Reply reply = replyRepository.findById(replyId).orElseThrow(() -> new NullPointerException("해당하는 댓글이 없습니다."));
+        reply.updateReply(requestDto.getContents());
+        ReplyUpdateReponseDto dto = new ReplyUpdateReponseDto(reply.getId(), reply.getContents(), reply.getCreateAt(),reply.getModifiedAt());
         return dto;
     }
 
@@ -63,11 +59,9 @@ public class ReplyService {
     public List<ReplySimpleResponseDto> getReplys(Long todoId) {
         List<Reply> replies = replyRepository.findByTodoId(todoId);
         List<ReplySimpleResponseDto> replySimpleResponseDtos = new ArrayList<>();
-        for (Reply Reply : replies) {
-            User user = Reply.getUser();
-            replySimpleResponseDtos.add(new ReplySimpleResponseDto(new UserDto(user.getId(),
-                    user.getUserName(),
-                    user.getEmail()), Reply.getContents()));
+        for (Reply reply : replies) {
+            User user = reply.getUser();
+            replySimpleResponseDtos.add(new ReplySimpleResponseDto(user,reply.getContents()));
         }
         return replySimpleResponseDtos;
     }

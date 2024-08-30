@@ -27,33 +27,32 @@ public class ManagerService {
     private final UserRepository userRepository;
     private final TodoRepository todoRepository;
 
-    public ManagerSaveResponseDto saveManager(Long todoId, ManagerSaveRequestDto requestDto) {
+    @Transactional
+    public void saveManager(Long todoId, ManagerSaveRequestDto requestDto) {
         //실제로 있는 일정 가져오기
         Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정을 찾을 수 없습니다."));
         //등록하려는 유저가 일정을 만든사람인지 확인하기
         User user = userRepository.findById(requestDto.getTodoUserId()).orElseThrow(() -> new NullPointerException("일정을 만든 유저가 아닙니다."));
 
-        if(!(todo.getUser() != null && ObjectUtils.nullSafeEquals(user.getId(),todo.getUser().getId()))){
+        if (!(todo.getUser() != null && ObjectUtils.nullSafeEquals(user.getId(), todo.getUser().getId()))) {
             throw new NullPointerException("등록하려는 유저가 일정을 만든 유저가 아닙니다.");
         }
         //등록하려는 담당자가 실제 존재하는 유저인지 확인.
-        User manager = userRepository.findById(requestDto.getManagerUserId()).orElseThrow(()-> new NullPointerException("해당 유저를 찾을 수 없습니다."));
+        User manager = userRepository.findById(requestDto.getManagerUserId()).orElseThrow(() -> new NullPointerException("해당 유저를 찾을 수 없습니다."));
 
-        Manager newManager = new Manager(manager,todo);
-        Manager savedManager = managerRepository.save(newManager);
-
-        return new ManagerSaveResponseDto(savedManager.getId());
+        Manager newManager = new Manager(manager, todo);
+        managerRepository.save(newManager);
     }
 
     public List<ManagerDetailResponseDto> getMenagers(Long todoId) {
-        Todo todo = todoRepository.findById(todoId).orElseThrow(() -> new NullPointerException("해당 일정을 찾을 수 없습니다."));
+
         List<Manager> managerList = managerRepository.findByTodoId();
-        
+
         List<ManagerDetailResponseDto> dtoList = new ArrayList<>();
 
         for (Manager manager : managerList) {
             User user = manager.getUser();
-            dtoList.add(new ManagerDetailResponseDto(manager.getId(), new UserDto(user.getId(),user.getUserName(),user.getEmail())));
+            dtoList.add(new ManagerDetailResponseDto(manager.getId(),user.getUserName(),user.getEmail()));
         }
         return dtoList;
     }

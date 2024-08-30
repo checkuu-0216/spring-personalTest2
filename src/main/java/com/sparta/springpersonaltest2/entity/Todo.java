@@ -17,16 +17,12 @@ public class Todo extends Timestamped{
     private String title;
     private String contents;
 
-    @OneToMany(mappedBy = "todo",cascade = CascadeType.REMOVE)
-    private List<Reply> Replys = new ArrayList<>();
-
-    @OneToMany(mappedBy = "todo")
-    private List<Manager> managers = new ArrayList<>();
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id",nullable = false)
     private User user;
 
+    @OneToMany(mappedBy = "todo",cascade = CascadeType.REMOVE)
+    private List<Reply> replys = new ArrayList<>();
 
     public Todo(User user , String title, String contents){
         this.user = user;

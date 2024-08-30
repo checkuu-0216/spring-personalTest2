@@ -19,8 +19,8 @@ public class TodoController {
     }
 
     @GetMapping("/todos/{todoId}") // 단건조회
-    public ResponseEntity<TodoDetailResponseDto> getTodo(@PathVariable Long id){
-        return ResponseEntity.ok(todoService.getTodo(id));
+    public ResponseEntity<TodoDetailResponseDto> getTodo(@PathVariable Long todoId){
+        return ResponseEntity.ok(todoService.getTodo(todoId));
     }
 
     @PutMapping("/todos/{todoId}/title") //제목 수정

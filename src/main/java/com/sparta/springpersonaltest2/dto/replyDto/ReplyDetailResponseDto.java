@@ -1,6 +1,7 @@
 package com.sparta.springpersonaltest2.dto.replyDto;
 
 import com.sparta.springpersonaltest2.dto.userDto.UserDto;
+import com.sparta.springpersonaltest2.entity.User;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
@@ -14,9 +15,9 @@ public class ReplyDetailResponseDto {
     private final LocalDateTime createAt;
     private final LocalDateTime modifiedAt;
 
-    public ReplyDetailResponseDto(Long id,UserDto user, String contents,LocalDateTime createAt,LocalDateTime modifiedAt){
+    public ReplyDetailResponseDto(Long id, User user, String contents, LocalDateTime createAt, LocalDateTime modifiedAt){
         this.id = id;
-        this.user = user;
+        this.user = new UserDto(user.getId(),user.getUserName(),user.getEmail());
         this.contents = contents;
         this.createAt = createAt;
         this.modifiedAt = modifiedAt;
